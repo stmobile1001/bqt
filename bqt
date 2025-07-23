@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Irregular Verbs Viewer</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      padding: 2rem;
+      text-align: center;
+    }
+    table {
+      width: 80%;
+      margin: 1rem auto;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    th {
+      background: #eee;
+    }
+    .btn-group {
+      margin: 1rem;
+    }
+    button, select {
+      padding: 0.5rem 1rem;
+      margin: 0.2rem;
+      border: none;
+      border-radius: 5px;
+      background-color: #3498db;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover, select:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Irregular Verbs Table</h1>
+  <div class="btn-group">
+    <select id="pageSelector">
+      <option value="page1">Page 1</option>
+      <option value="p1a">Page 1 (Part A)</option>
+      <option value="p1b">Page 1 (Part B)</option>
+      <option value="page2">Page 2</option>
+      <option value="p2a">Page 2 (Part A)</option>
+      <option value="p2b">Page 2 (Part B)</option>
+      <option value="page3">Page 3</option>
+    </select>
+    <button onclick="showSelectedPage()">Show</button>
+    <button onclick="showSelectedPageShuffled()">Shuffle Selected</button>
+    <button onclick="toggleVN()">Toggle Meaning</button>
+  </div>
+
+  <table id="verbTable">
+    <thead>
+      <tr><th>Infinitive</th><th>Past</th><th>Past Participle</th><th class="vn">Meaning (Vietnamese)</th></tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+
+  <script>
+    const data = {
+      page1: be|was/were|been|thì, là, ở, bị
+bear|bore|born/borne|mang, chịu đựng
+beat|beat|beaten|đánh bại
+become|became|become|trở nên, thành
+begin|began|begun|bắt đầu
+bite|bit|bitten|cắn
+bleed|bled|bled|chảy máu
+blow|blew|blown|thổi
+break|broke|broken|vỡ, đập vỡ
+bring|brought|brought|mang đến, đem
+build|built|built|xây dựng
+burn|burnt/burned|burnt/burned|đốt, cháy
+buy|bought|bought|mua
+catch|caught|caught|bắt, chụp
+choose|chose|chosen|lựa chọn
+come|came|come|đến, đi đến
+cost|cost|cost|giá trị
+creep|crept|crept|leo, bò, trườn, lết
+cut|cut|cut|cắt, chặt
+do|did|done|làm
+draw|drew|drawn|vẽ
+drink|drank|drunk|uống
+drive|drove|driven|lái xe
+dig|dug|dug|đào, xới, cuốc
+eat|ate|eaten|ăn
+fall|fell|fallen|ngã, rơi
+feed|fed|fed|cho ăn, nuôi
+feel|felt|felt|cảm thấy
+fight|fought|fought|chiến đấu
+find|found|found|tìm kiếm
+fly|flew|flown|bay
+forbid|forbade|forbidden|cấm
+forget|forgot|forgotten|quên
+forgive|forgave|forgiven|tha thứ
+freeze|froze|frozen|(làm) đông lại
+get|get|got/gotten|được, có được
+give|gave|given|cho, tặng,
+
+      page2: go|went|gone|đi
+grow|grew|grown|mọc, gia tăng
+hang|hung|hung|treo
+have|had|had|có, sở hữu
+hear|heard|heard|nghe
+hide|hid|hidden|giấu, trốn, nấp
+hit|hit|hit|đụng, đánh
+hold|held|held|tổ chức
+hurt|hurt|hurt|làm đau
+keep|kept|kept|giữ
+know|knew|known|biết
+lay|laid|laid|đặt, đẻ
+lead|led|led|dẫn dắt, lãnh đạo
+learn|learnt/learned|learnt/learned|học
+leave|left|left|ra đi
+lend|lent|lent|cho mượn, vay
+lie|lay|lain|nằm
+light|lit/lighted|lit/lighted|thắp sáng
+lose|lost|lost|đánh mất
+leap|leapt|leapt|nhảy
+make|made|made|chế tạo, sản xuất
+meet|met|met|gặp
+mistake|mistook|mistaken|phạm lỗi, lầm lỗi
+pay|paid|paid|trả (tiền)
+put|put|put|đặt, để
+read|read|read|đọc
+ride|rode|ridden|cưỡi
+ring|rang|rung|rung chuông
+rise|rose|risen|đứng dậy, mọc
+run|ran|run|chạy
+say|said|said|nói
+see|saw|seen|nhìn thấy
+sell|sold|sold|bán
+send|sent|sent|gửi
+sew|sewed|sewn/sewed|may, vá
+shake|shook|shaken|rung, lắc, giựt
+shine|shone|shone|chiếu sáng
+shoot|shot|shot|bắn
+show|showed|shown|cho xem,
+
+      page3: sing|sang|sung|hát
+sink|sank|sunk|chìm
+sit|sat|sat|ngồi
+sleep|slept|slept|ngủ
+smell|smelt/smelled|smelt/smelled|ngửi
+speak|spoke|spoken|nói
+speed|sped/speeded|sped/speeded|chạy quá tốc độ
+spell|spelt/spelled|spelt/spelled|đánh vần
+spend|spent|spent|tiêu xài
+spoil|spoilt/spoiled|spoilt/spoiled|hỏng, hư, ươn
+stand|stood|stood|đứng
+steal|stole|stolen|đánh cắp
+strike|struck|struck|đánh đập, tấn công
+sweep|swept|swept|quét nhà
+swim|swam|swum|bơi
+seek|sought|sought|tìm kiếm
+shut|shut|shut|đóng, gập lại
+take|took|taken|cầm, lấy
+teach|taught|taught|dạy học
+tear|tore|torn|xé, rách
+think|thought|thought|suy nghĩ
+throw|threw|thrown|ném, vứt
+tell|told|told|kể, bảo
+understand|understood|understood|hiểu
+wake|woke|woken|thức giấc
+wear|wore|worn|mang, mặc, đội
+wet|wet|wet|làm ướt
+win|won|won|chiến thắng
+wind|wound|wound|quấn, luộn khúc
+write|wrote|written|viết
+    };
+
+    const page1lines = data.page1.split('\n');
+    const page2lines = data.page2.split('\n');
+    data.p1a = page1lines.slice(0, page1lines.findIndex(l => l.startsWith('creep'))).join('\n');
+    data.p1b = page1lines.slice(page1lines.findIndex(l => l.startsWith('creep'))).join('\n');
+    data.p2a = page2lines.slice(0, page2lines.findIndex(l => l.startsWith('leap')) + 1).join('\n');
+    data.p2b = page2lines.slice(page2lines.findIndex(l => l.startsWith('leap')) + 1).join('\n');
+
+    let showVN = true;
+
+    function showSet(key, shuffle = false) {
+      let lines = data[key].trim().split("\n");
+      if (shuffle) shuffleArray(lines);
+
+      const tbody = document.getElementById("tableBody");
+      tbody.innerHTML = "";
+
+      lines.forEach(line => {
+        const [v1, v2, v3, meaning] = line.split("|");
+        const tr = document.createElement("tr");
+        tr.innerHTML = <td>${v1}</td><td>${v2}</td><td>${v3}</td><td class='vn'>${meaning}</td>;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function shuffleArray(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    function showSelectedPage() {
+      const key = document.getElementById("pageSelector").value;
+      showSet(key);
+    }
+
+    function showSelectedPageShuffled() {
+      const key = document.getElementById("pageSelector").value;
+      showSet(key, true);
+    }
+
+    function toggleVN() {
+      showVN = !showVN;
+      document.querySelectorAll('.vn').forEach(el => {
+        el.style.display = showVN ? '' : 'none';
+      });
+    }
+
+    showSet('page1');
+  </script>
+</body>
+</html>
